@@ -1,0 +1,141 @@
+config-version: 1
+
+time:
+  # REAL: all daily settlements use the real calendar day (default).
+  # MINECRAFT: experimental, uses 24000 ticks per day.
+  day-definition: REAL
+
+town:
+  creation-cost: 1000.0
+  claim-cost: 50.0
+  upkeep-per-block: 1.0
+  base-claim-blocks: 16
+  claim-blocks-per-resident: 8
+  max-town-blocks: 1024
+  bankruptcy-days: 7
+  abandoned-days: 14
+  abandoned-dissolve-days: 7
+
+nation:
+  creation-cost: 100000.0
+  max-towns: 50
+
+plot:
+  shop-daily-income: 5.0
+  farm-upkeep-discount: 0.5
+  bank-interest-rate: 0.001
+  inn-daily-income: 2.0
+  arena-daily-income: 1.0
+  fort-defense-bonus: 0.05
+  fort-upkeep-extra: 2.0
+  embassy-upkeep: 3.0
+
+economy:
+  starting-balance: 100.0
+  max-daily-tax: 100.0
+  currency-name: Geo
+  auto-save-interval-seconds: 300
+
+physical-currency:
+  enabled: true
+  fee-rate: 0.02
+  max-issued-per-denomination: 1000000
+
+war:
+  enabled: true
+  declare-cost: 2000.0
+  campaign:
+    capture-points: 100
+    points-per-kill: 20
+    points-per-break: 5
+    duration-minutes: 120
+    exile-days: 7
+    cost: 5000.0
+    capture-countdown-seconds: 900
+    fail-countdown-seconds: 300
+    base-respawn-seconds: 10
+    respawn-increase-percent: 0.10
+    max-defender-deaths: 15
+    defender-ratio: 0.40
+    compensation-percent: 0.70
+    max-resident-contribution-percent: 0.30
+    max-per-nation: 1
+  kill-drop:
+    enabled: true
+    war-percent: 0.10
+    war-decay-factor: 0.70
+    base-chance: 0.20
+    base-amount: 10.0
+    decay-factor: 0.70
+
+festival:
+  enabled: true
+  tax-multiplier: 0.5
+  influence-multiplier: 2.0
+  shop-price-multiplier: 0.9
+  weekend: false
+  custom: {}
+
+influence:
+  enabled: true
+  daily-growth: 1.0
+  max-town: 100000.0
+
+market:
+  shop-enabled: true
+  free-market-enabled: true
+  shop:
+    trade-step: 1
+    price-elasticity: 0.02
+    price-ceiling-multiplier: 5.0
+    price-floor-multiplier: 0.1
+    volume-decay: 0.98
+    daily-random-range: 0.08
+    sell-buy-ratio: 0.85
+    player-daily-buy-limit: 512
+    player-daily-sell-limit: 512
+    server-daily-buy-limit: 8192
+    server-daily-sell-limit: 8192
+  free-market:
+    tax: 0.0
+    max-listings-per-player: 20
+    min-price: 0.01
+    max-price: 1000000.0
+    expire-days: 0
+
+checkin:
+  enabled: true
+  base-reward: 5.0
+  cycle-days: 7
+  streak-rewards: [50.0, 80.0, 120.0, 180.0, 250.0, 350.0, 500.0]
+
+redeem:
+  enabled: true
+
+protection:
+  block-break: true
+  block-place: true
+  interact: true
+  pvp: true
+  wilderness-pvp: true
+  allow-foreigner-actions: true
+
+web:
+  enabled: true
+  bind: 127.0.0.1
+  port: 8080
+  # Leave empty and let the operator set a public URL. Never hardcode a production domain.
+  url: ""
+  thread-pool-size: 4
+  session-expiry-hours: 720
+  one-time-expiry-minutes: 10
+  login-max-attempts: 5
+  login-lock-minutes: 5
+  # Optional map service URL. Empty disables /api/map proxy.
+  map-url: ""
+  allowed-origins: []
+
+world-mapping:
+  "minecraft:overworld": world
+  "minecraft:the_nether": world_nether
+  "minecraft:the_end": world_the_end

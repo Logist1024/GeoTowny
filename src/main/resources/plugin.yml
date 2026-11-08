@@ -1,0 +1,163 @@
+name: GeoTowny
+version: '${version}'
+main: com.geotowny.GeoTownyPlugin
+api-version: '26.1'
+authors: [GeoTowny Contributors]
+description: Earth geopolitics simulation for Minecraft servers. Towns, nations, diplomacy, war and influence.
+website: https://github.com/dian-ZD/geotowny
+softdepend: [PlaceholderAPI]
+commands:
+  geotowny:
+    description: GeoTowny admin command
+    aliases: [gt]
+    permission: geotowny.admin
+    usage: /geotowny <version|reload|verify|repair>
+  town:
+    description: Town management
+    aliases: [t]
+    usage: /town <new|info|list|members|claim|...>
+  nation:
+    description: Nation management
+    aliases: [n]
+    usage: /nation <new|info|list|add|kick|set|war|...>
+  plot:
+    description: Personal plot management
+    aliases: [p]
+    usage: /plot <claim|unclaim|set|fs|nfs|buy|perms|info>
+  resident:
+    description: Resident info and transfers
+    aliases: [res]
+    usage: /resident <info|pay|list>
+  geo:
+    description: GeoTowny statistics and admin
+    usage: /geo <info|save|reload|list|influence|war|top|version|admin>
+  shop:
+    description: Open the dynamic market
+    aliases: [market]
+    usage: /shop [page|prices|quota|buy|sell]
+  fm:
+    description: Open the free market
+    usage: /fm [page|mine|sell|buy|cancel|search]
+  checkin:
+    description: Open the daily check-in calendar
+    aliases: [ci]
+    usage: /checkin [info]
+  redeem:
+    description: Redeem codes
+    usage: /redeem <code>|create|generate|list|delete|setmax|gui
+  currency:
+    description: Physical currency
+    usage: /currency [info|denominations|withdraw|deposit|issued|reset]
+permissions:
+  geotowny.player:
+    description: Base permission for all players
+    default: true
+  geotowny.town.create:
+    description: Create a town
+    default: true
+  geotowny.town.claim:
+    description: Claim or unclaim town chunks
+    default: true
+  geotowny.town.invite:
+    description: Invite players to a town
+    default: true
+  geotowny.town.kick:
+    description: Kick players from a town
+    default: true
+  geotowny.town.set:
+    description: Change town settings
+    default: true
+  geotowny.town.deposit:
+    description: Deposit into town treasury
+    default: true
+  geotowny.town.withdraw:
+    description: Withdraw from town treasury
+    default: true
+  geotowny.town.rank:
+    description: Manage town ranks
+    default: true
+  geotowny.town.merge:
+    description: Merge towns
+    default: true
+  geotowny.town.split:
+    description: Split a town
+    default: true
+  geotowny.nation.create:
+    description: Create a nation
+    default: true
+  geotowny.nation.diplomacy:
+    description: Manage diplomacy
+    default: true
+  geotowny.nation.war:
+    description: Declare war and manage campaigns
+    default: true
+  geotowny.nation.set:
+    description: Change nation settings
+    default: true
+  geotowny.nation.rank:
+    description: Manage nation ranks
+    default: true
+  geotowny.nation.vote:
+    description: Vote in war votes and impeachments
+    default: true
+  geotowny.plot.use:
+    description: Manage personal plots
+    default: true
+  geotowny.shop.use:
+    description: Use the dynamic market
+    default: true
+  geotowny.shop.admin:
+    description: Administer market prices
+    default: op
+  geotowny.fm.use:
+    description: Use the free market
+    default: true
+  geotowny.fm.admin:
+    description: Administer the free market
+    default: op
+  geotowny.checkin:
+    description: Use daily check-in
+    default: true
+  geotowny.redeem.use:
+    description: Redeem codes
+    default: true
+  geotowny.redeem.admin:
+    description: Administer redeem codes
+    default: op
+  geotowny.currency.use:
+    description: Withdraw and deposit physical currency
+    default: true
+  geotowny.currency.admin:
+    description: Administer physical currency issuance
+    default: op
+  geotowny.web.login:
+    description: Generate a web panel login link
+    default: true
+  geotowny.admin:
+    description: Base admin permission
+    default: op
+    children:
+      geotowny.admin.reload: true
+      geotowny.admin.verify: true
+      geotowny.admin.repair: true
+      geotowny.admin.economy: true
+      geotowny.admin.war: true
+      geotowny.admin.redeem: true
+  geotowny.admin.reload:
+    description: Reload GeoTowny configuration
+    default: op
+  geotowny.admin.verify:
+    description: Run data consistency checks
+    default: op
+  geotowny.admin.repair:
+    description: Repair data consistency issues
+    default: op
+  geotowny.admin.economy:
+    description: Administer player and treasury balances
+    default: op
+  geotowny.admin.war:
+    description: Administer wars and campaigns
+    default: op
+  geotowny.admin.redeem:
+    description: Manage redeem codes
+    default: op

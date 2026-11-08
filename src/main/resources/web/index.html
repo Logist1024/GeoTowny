@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GeoTowny Web</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div id="login" class="card login-card">
+  <h1>GeoTowny Web</h1>
+  <p class="muted">使用游戏内 <code>/geo web password set &lt;密码&gt;</code> 设置密码，或使用 <code>/geo web login</code> 获取一次性链接。</p>
+  <form id="login-form">
+    <label>玩家名<input id="login-name" autocomplete="username" required></label>
+    <label>密码<input id="login-password" type="password" autocomplete="current-password" required></label>
+    <button type="submit">登录</button>
+  </form>
+  <p id="login-error" class="error"></p>
+</div>
+
+<div id="app" hidden>
+  <header>
+    <div><strong>GeoTowny</strong> <span id="server-summary" class="muted"></span></div>
+    <div><span id="player-name"></span> <button id="logout" class="secondary">退出</button></div>
+  </header>
+  <nav id="nav">
+    <button data-view="overview">总览</button>
+    <button data-view="towns">城镇</button>
+    <button data-view="nations">国家</button>
+    <button data-view="market">商店</button>
+    <button data-view="freemarket">自由市场</button>
+    <button data-view="chat">聊天</button>
+    <button data-view="settings">设置</button>
+  </nav>
+  <main>
+    <section id="view-overview" class="view">
+      <div class="grid">
+        <div class="card"><h2>我的信息</h2><div id="player-card"></div></div>
+        <div class="card"><h2>服务器</h2><div id="info-card"></div></div>
+      </div>
+    </section>
+    <section id="view-towns" class="view" hidden><div class="card"><h2>城镇列表</h2><div id="town-list"></div></div></section>
+    <section id="view-nations" class="view" hidden><div class="card"><h2>国家列表</h2><div id="nation-list"></div></div></section>
+    <section id="view-market" class="view" hidden><div class="card"><h2>动态商店</h2><div id="market-list"></div></div></section>
+    <section id="view-freemarket" class="view" hidden>
+      <div class="card"><h2>自由市场挂单</h2><div id="fm-list"></div></div>
+      <div class="card"><h2>上架</h2>
+        <form id="fm-form" class="inline-form">
+          <input id="fm-item" placeholder="minecraft:diamond" required>
+          <input id="fm-qty" type="number" min="1" value="1" required>
+          <input id="fm-price" type="number" step="0.01" min="0.01" value="1" required>
+          <button type="submit">上架</button>
+        </form>
+      </div>
+    </section>
+    <section id="view-chat" class="view" hidden>
+      <div class="card"><h2>聊天</h2><div id="chat-list"></div>
+        <form id="chat-form" class="inline-form"><input id="chat-message" maxlength="256" placeholder="发送消息" required><button type="submit">发送</button></form>
+      </div>
+    </section>
+    <section id="view-settings" class="view" hidden>
+      <div class="grid">
+        <div class="card"><h2>城镇设置</h2>
+          <form id="town-settings-form">
+            <label>税收<input id="town-taxes" type="number" step="0.01" min="0"></label>
+            <label>公告<input id="town-board"></label>
+            <label class="check"><input id="town-open" type="checkbox">开放加入</label>
+            <label class="check"><input id="town-public" type="checkbox">公开出生点</label>
+            <button type="submit">保存城镇设置</button>
+          </form>
+          <h3>城镇国库</h3>
+          <form id="town-treasury-form" class="inline-form">
+            <input id="town-amount" type="number" step="0.01" min="0.01" value="10" required>
+            <button type="submit" data-action="deposit">存入</button>
+            <button type="submit" data-action="withdraw" class="secondary">取出</button>
+          </form>
+        </div>
+        <div class="card"><h2>国家设置</h2>
+          <form id="nation-settings-form">
+            <label>税收<input id="nation-taxes" type="number" step="0.01" min="0"></label>
+            <label>公告<input id="nation-board"></label>
+            <label>国体<select id="nation-ideology">
+              <option value="DEMOCRACY">民主制</option>
+              <option value="EMPIRE">帝国制</option>
+              <option value="FEDERATION">联邦制</option>
+              <option value="THEOCRACY">神权制</option>
+              <option value="MONARCHY">君主制（称呼）</option>
+              <option value="REPUBLIC">共和制（称呼）</option>
+              <option value="COLLECTIVIST">集体制（称呼）</option>
+              <option value="TRIBAL">部落制（称呼）</option>
+            </select></label>
+            <button type="submit">保存国家设置</button>
+          </form>
+          <h3>国家国库</h3>
+          <form id="nation-treasury-form" class="inline-form">
+            <input id="nation-amount" type="number" step="0.01" min="0.01" value="10" required>
+            <button type="submit" data-action="deposit">存入</button>
+            <button type="submit" data-action="withdraw" class="secondary">取出</button>
+          </form>
+        </div>
+        <div class="card"><h2>转账</h2>
+          <form id="transfer-form">
+            <label>目标玩家<input id="transfer-target" required></label>
+            <label>金额<input id="transfer-amount" type="number" step="0.01" min="0.01" value="10" required></label>
+            <button type="submit">转账</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="toast" class="toast" hidden></div>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>
